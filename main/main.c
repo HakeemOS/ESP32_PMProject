@@ -12,6 +12,7 @@
 #endif
 
 const char *msg = "Testing 1,2,3 ... Testing";
+char * TxPtr; 
 
 void TaskOne(void *arg){
     char *taskName = pcTaskGetName(NULL); 
@@ -20,17 +21,20 @@ void TaskOne(void *arg){
     uint8_t inChar;
     int count = 0; 
     bool testPrint = false; 
+    char *TxArr = (char *)pvPortMalloc(100*sizeof(char)); 
+    TxPtr = TxArr; 
     while (1){
         inChar = fgetc(stdin); 
         if ('\n' == inChar){
             charArr[count] = inChar; 
             count++; 
-            //char *TxArr = (char*)pvPortMalloc(count*sizeof(char));
+            TxPtr = TxArr; 
             testPrint = true;  
         } else if (0xFF == inChar){
             ; 
         } else {
             charArr[count] = inChar; 
+            TxArr[count] = inChar; 
             count++; 
         }
         
@@ -69,6 +73,10 @@ void TaskTwo(void *arg){
         //    printf("%c : T2\n", testChar); 
         //} 
         //ESP_LOGW(taskName, "Remaining mem in task stack (words): %d", uxTaskGetStackHighWaterMark(NULL));
+        for (size_t i = 0; i < 4; i++){
+            printf("%c\n", TxPtr[i]); 
+        }
+        
         vTaskDelay(10000/portTICK_PERIOD_MS); 
     }
     
@@ -79,7 +87,7 @@ void setup(){
     char *taskName = pcTaskGetName(NULL); 
     printf("\n"); 
     printf("%s: From setup\n", msg);
-    xTaskCreatePinnedToCore(TaskOne, "Task One", 3000, NULL, 1, NULL, app_cpu); 
+    xTaskCreatePinnedToCore(TaskOne, "Task One", 2000, NULL, 1, NULL, app_cpu); 
     xTaskCreatePinnedToCore(TaskTwo, "Task Two", 1800, NULL, 1, NULL, app_cpu);
 }
 void app_main(void){
