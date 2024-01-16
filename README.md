@@ -3,7 +3,7 @@
 ## PM Project 
 
 Task One   
-Recieves input from serial monitor until enter is pressed and stores onto heap memory  
+- Recieves input from serial monitor until enter is pressed and stores onto heap memory  
 - Notifies second task message has been stored
 
 Task Two  
