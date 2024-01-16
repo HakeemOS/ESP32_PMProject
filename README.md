@@ -11,4 +11,4 @@ Task Two
 - Frees heap memory 
 
 Task Three    
--- On input reception blink onboard LED quickly a few times
+- On input reception blink onboard LED quickly a few times
