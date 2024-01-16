@@ -7,7 +7,7 @@ Recieves input from serial monitor until enter is pressed and stores onto heap m
 Notifies second task message has been stored
 
 Task Two -
-Recieves notification and prints input to the serial monitor;
+Recieves notification and prints input to the serial monitor  
 Frees heap memory 
 
 Task Three -  
