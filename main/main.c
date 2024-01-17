@@ -13,9 +13,9 @@
 
 #define led_pin 13 
 
-const char *msg = " -- Task Messaging Demo --"; //remove at some point; random check
-char * TxPtr = NULL; 
-int TxFlag = 0; 
+static const char *msg = " -- Task Messaging Demo --"; //remove at some point; random check
+static char * TxPtr = NULL; 
+static uint8_t TxFlag = 0; 
 
 
 //stores input onto heap; prints heap to confirm 
@@ -25,7 +25,7 @@ void TaskOne(void *arg){
     //char *sCharArr = &charArr; 
     char *taskName = pcTaskGetName(NULL);
     uint8_t inChar;
-    int count = 0; 
+    uint8_t count = 0; 
     while (1){
         inChar = fgetc(stdin); 
         if (0 == TxFlag){
@@ -75,7 +75,7 @@ void TaskTwo(void *arg){
     char *taskName = pcTaskGetName(NULL); 
     while (1){      
         if (2 == TxFlag){
-            int i = 0; 
+            uint8_t i = 0; 
             char checkChar = ' '; 
             ESP_LOGI(taskName, "Msg Received!");  
             if (NULL != TxPtr){
@@ -96,7 +96,7 @@ void TaskTwo(void *arg){
 
 //Blinks onboard LED when Msg received
 void TaskThree(void *arg){
-    char lvl = 0; 
+    uint8_t lvl = 0; 
     while (1){
         if (2 == TxFlag){
             lvl = 0; 
