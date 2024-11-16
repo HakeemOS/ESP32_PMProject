@@ -40,7 +40,7 @@ void TaskOne(void *arg){
             ESP_LOGW(taskName, "Remaining mem in task stack (words): %d", uxTaskGetStackHighWaterMark(NULL));
             ESP_LOGW(taskName, "Remaining mem on heap (bytes): %d\n", xPortGetFreeHeapSize());
             //charArr[count] = inChar; 
-        } else if (0xFF == inChar){
+        } else if (0xFF == inChar){                                                                             //Special Char to be ignored
             ; 
         } else {
             TxPtr[count] = inChar; 
